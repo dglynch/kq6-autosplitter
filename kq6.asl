@@ -20,15 +20,21 @@ reset {
 }
 
 split {
-    if (current.Room == 145) {
-        return old.Room == 280;
-    } else if (current.Room == 300 && settings["cliff_base"]) {
-        return old.Room == 500;
-    } else if (current.Room == 340) {
-        return old.Room == 320 || old.Room == 440;
-    } else if (current.Room == 540) {
-        return current.Score - old.Score == 2;
-    } else if (current.Room == 750) {
-        return current.Score - old.Score == 5;
+    switch ((int) current.Room) {
+        case 145:
+            return old.Room == 280;
+        case 300:
+            if (settings["cliff_base"]) {
+                return old.Room == 500;
+            }
+            return false;
+        case 340:
+            return old.Room == 320 || old.Room == 440;
+        case 540:
+            return current.Score - old.Score == 2;
+        case 750:
+            return current.Score - old.Score == 5;
+        default:
+            return false;
     }
 }
