@@ -2,7 +2,7 @@
 // Emulator:    DOSBox ECE r4450
 // Author:      Dan Lynch
 
-state("DOSBOX") {
+state("DOSBox") {
     short Room  : "DOSBox.exe", 0x524670, 0x23C4A;
     byte Score  : "DOSBox.exe", 0x524670, 0x23C52;
 }
