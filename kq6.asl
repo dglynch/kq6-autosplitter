@@ -30,7 +30,7 @@ startup {
 }
 
 start {
-    if (old.Room == 100 && current.Room == 200) {
+    if (old.Room == 100 && current.Room == 200 && current.Score == 0) {
         vars.completed.Clear();
         return true;
     }
