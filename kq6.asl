@@ -16,7 +16,7 @@ start {
 }
 
 reset {
-    return old.Room != 100 && current.Room == 100;
+    return current.Room == 100;
 }
 
 split {
