@@ -8,8 +8,23 @@ state("DOSBox") {
 }
 
 startup {
+    settings.Add("magic_map", true, "Magic map");
+    settings.SetToolTip("magic_map", "Split when the genie cutscene begins after you buy the magic map");
+
     settings.Add("cliff_base", false, "Base of cliffs");
     settings.SetToolTip("cliff_base", "Split when you arrive at the cliffs from the Isle of the Beast");
+
+    settings.Add("cliff_top", true, "Top of cliffs");
+    settings.SetToolTip("cliff_top", "Split when you arrive at the top of the cliffs after solving the logic puzzles");
+
+    settings.Add("catacombs", true, "Catacombs");
+    settings.SetToolTip("catacombs", "Split when you leave the catacombs");
+
+    settings.Add("beast", true, "Beauty & Beast");
+    settings.SetToolTip("beast", "Split when the gate closes on Beauty and Beast");
+
+    settings.Add("vizier", true, "Abdul Alhazred");
+    settings.SetToolTip("vizier", "Split when you land the final blow on Abdul Alhazred");
 }
 
 start {
@@ -23,18 +38,21 @@ reset {
 split {
     switch ((int) current.Room) {
         case 145:
-            return old.Room == 280;
+            return settings["magic_map"] && old.Room == 280;
         case 300:
-            if (settings["cliff_base"]) {
-                return old.Room == 500;
+            return settings["cliff_base"] && old.Room == 500;
+        case 340:
+            if (old.Room == 320) {
+                return settings["cliff_top"];
+            }
+            if (old.Room == 440) {
+                return settings["catacombs"];
             }
             return false;
-        case 340:
-            return old.Room == 320 || old.Room == 440;
         case 540:
-            return current.Score - old.Score == 2;
+            return settings["beast"] && current.Score - old.Score == 2;
         case 750:
-            return current.Score - old.Score == 5;
+            return settings["vizier"] && current.Score - old.Score == 5;
         default:
             return false;
     }
