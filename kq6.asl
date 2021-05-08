@@ -1,5 +1,5 @@
 // Game:        King's Quest VI: Heir Today, Gone Tomorrow
-// Emulator:    DOSBox ECE r4450
+// Emulator:    DOSBox ECE (any recent version)
 // Author:      Dan Lynch
 
 state("DOSBox") {
