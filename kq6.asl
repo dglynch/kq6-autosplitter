@@ -8,7 +8,8 @@ state("DOSBox") {
 }
 
 startup {
-    settings.Add("cliff_base", false, "Split at base of cliffs");
+    settings.Add("cliff_base", false, "Base of cliffs");
+    settings.SetToolTip("cliff_base", "Split when you arrive at the cliffs from the Isle of the Beast");
 }
 
 start {
