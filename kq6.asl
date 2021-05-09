@@ -32,15 +32,29 @@ startup {
     settings.SetToolTip("vizier", "Split when you land the final blow on Abdul Alhazred");
 
     vars.completed = new HashSet<string>();
+    vars.towerPoints = 0;
 }
 
 init {
     version = modules.First().ModuleMemorySize.ToString();
 }
 
+update {
+    switch ((int) current.Room) {
+        case 750:
+            if (current.Score > old.Score) {
+                vars.towerPoints += current.Score - old.Score;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 start {
     if (old.Room == 100 && current.Room == 200 && current.Score == 0) {
         vars.completed.Clear();
+        vars.towerPoints = 0;
         return true;
     }
 }
@@ -48,6 +62,7 @@ start {
 reset {
     if (current.Room == 100) {
         vars.completed.Clear();
+        vars.towerPoints = 0;
         return true;
     }
 }
@@ -91,7 +106,7 @@ split {
             }
             return false;
         case 750:
-            if (current.Score - old.Score == 5) {
+            if (current.Score - old.Score == 5 && vars.towerPoints >= 7) {
                 if (!vars.completed.Contains("vizier")) {
                     vars.completed.Add("vizier");
                     return settings["vizier"];
