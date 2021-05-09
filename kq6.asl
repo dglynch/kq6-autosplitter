@@ -24,7 +24,7 @@ startup {
     settings.SetToolTip("gnomes", "Split when you either fool or bypass the gnomes for the first time");
 
     settings.Add("cliff_base", false, "Base of cliffs");
-    settings.SetToolTip("cliff_base", "Split when you arrive at the base of the cliffs for the first time");
+    settings.SetToolTip("cliff_base", "Split when you arrive at the base of the cliffs for the first time after fooling or bypassing the gnomes");
 
     settings.Add("cliff_top", true, "Top of cliffs");
     settings.SetToolTip("cliff_top", "Split when you arrive at the top of the cliffs after solving the logic puzzles");
@@ -85,9 +85,11 @@ split {
             }
             return false;
         case 300:
-            if (!vars.completed.Contains("cliff_base")) {
-                vars.completed.Add("cliff_base");
-                return settings["cliff_base"];
+            if (vars.completed.Contains("gnomes")) {
+                if (!vars.completed.Contains("cliff_base")) {
+                    vars.completed.Add("cliff_base");
+                    return settings["cliff_base"];
+                }
             }
             return false;
         case 340:
