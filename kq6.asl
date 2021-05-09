@@ -3,18 +3,25 @@
 // Author:      Dan Lynch
 
 state("DOSBox", "35627008") {
-    short Room  : "DOSBox.exe", 0x524670, 0x23C4A;
-    byte Score  : "DOSBox.exe", 0x524670, 0x23C52;
+    short Room      : "DOSBox.exe", 0x524670, 0x23C4A;
+    byte Score      : "DOSBox.exe", 0x524670, 0x23C52;
+    short XPosition : "DOSBox.exe", 0x524670, 0x23DCC;
+    short YPosition : "DOSBox.exe", 0x524670, 0x23DCE;
 }
 
 state("DOSBox", "36634624") {
-    short Room  : "DOSBox.exe", 0x519670, 0x23C4A;
-    byte Score  : "DOSBox.exe", 0x519670, 0x23C52;
+    short Room      : "DOSBox.exe", 0x519670, 0x23C4A;
+    byte Score      : "DOSBox.exe", 0x519670, 0x23C52;
+    short XPosition : "DOSBox.exe", 0x519670, 0x23DCC;
+    short YPosition : "DOSBox.exe", 0x519670, 0x23DCE;
 }
 
 startup {
     settings.Add("magic_map", true, "Magic map");
     settings.SetToolTip("magic_map", "Split when the genie cutscene begins after you buy the magic map");
+
+    settings.Add("gnomes", false, "Gnomes");
+    settings.SetToolTip("gnomes", "Split when you either fool or bypass the gnomes for the first time");
 
     settings.Add("cliff_base", false, "Base of cliffs");
     settings.SetToolTip("cliff_base", "Split when you arrive at the base of the cliffs for the first time");
@@ -94,6 +101,30 @@ split {
                 if (!vars.completed.Contains("catacombs")) {
                     vars.completed.Add("catacombs");
                     return settings["catacombs"];
+                }
+            }
+            return false;
+        case 450:
+            if (current.Score - old.Score == 2 && current.XPosition == 231 && current.YPosition == 129) {
+                 if (!vars.completed.Contains("gnomes")) {
+                    vars.completed.Add("gnomes");
+                    return settings["gnomes"];
+                }
+            }
+            return false;
+        case 460:
+            if (old.Room == 450) {
+                if (!vars.completed.Contains("gnomes")) {
+                    vars.completed.Add("gnomes");
+                    return settings["gnomes"];
+                }
+            }
+            return false;
+        case 470:
+            if (old.Room == 450) {
+                if (!vars.completed.Contains("gnomes")) {
+                    vars.completed.Add("gnomes");
+                    return settings["gnomes"];
                 }
             }
             return false;
