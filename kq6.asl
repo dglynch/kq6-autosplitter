@@ -1,10 +1,15 @@
 // Game:        King's Quest VI: Heir Today, Gone Tomorrow
-// Emulator:    DOSBox ECE (any recent version)
+// Emulator:    DOSBox ECE (any recent version, or r4230)
 // Author:      Dan Lynch
 
-state("DOSBox") {
+state("DOSBox", "35627008") {
     short Room  : "DOSBox.exe", 0x524670, 0x23C4A;
     byte Score  : "DOSBox.exe", 0x524670, 0x23C52;
+}
+
+state("DOSBox", "36634624") {
+    short Room  : "DOSBox.exe", 0x519670, 0x23C4A;
+    byte Score  : "DOSBox.exe", 0x519670, 0x23C52;
 }
 
 startup {
@@ -27,6 +32,10 @@ startup {
     settings.SetToolTip("vizier", "Split when you land the final blow on Abdul Alhazred");
 
     vars.completed = new HashSet<string>();
+}
+
+init {
+    version = modules.First().ModuleMemorySize.ToString();
 }
 
 start {
