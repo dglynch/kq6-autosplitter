@@ -49,6 +49,15 @@ startup {
     settings.Add("beast", true, "Beauty & Beast");
     settings.SetToolTip("beast", "Split when the gate closes on Beauty and Beast");
 
+    settings.Add("nightmare", false, "Nightmare");
+    settings.SetToolTip("nightmare", "Split when you start riding nightmare to travel to the Realm of the Dead");
+
+    settings.Add("samhain", false, "Samhain");
+    settings.SetToolTip("samhain", "Split when you start riding nightmare to return from the Realm of the Dead");
+
+    settings.Add("castle", false, "Castle");
+    settings.SetToolTip("castle", "Split when you enter the castle either by disguise or magic door");
+
     settings.Add("vizier", true, "Abdul Alhazred");
     settings.SetToolTip("vizier", "Split when you land the final blow on Abdul Alhazred");
 
@@ -95,6 +104,20 @@ split {
                 if (!vars.completed.Contains("magic_map")) {
                     vars.completed.Add("magic_map");
                     return settings["magic_map"];
+                }
+            }
+            return false;
+        case 155:
+            if (old.Room == 340) {
+                if (!vars.completed.Contains("nightmare")) {
+                    vars.completed.Add("nightmare");
+                    return settings["nightmare"];
+                }
+            }
+            if (old.Room == 680) {
+                if (!vars.completed.Contains("samhain")) {
+                    vars.completed.Add("samhain");
+                    return settings["samhain"];
                 }
             }
             return false;
@@ -149,6 +172,22 @@ split {
                  if (!vars.completed.Contains("beast")) {
                     vars.completed.Add("beast");
                     return settings["beast"];
+                }
+            }
+            return false;
+        case 710:
+            if (old.Room == 230) {
+                if (!vars.completed.Contains("castle")) {
+                    vars.completed.Add("castle");
+                    return settings["castle"];
+                }
+            }
+            return false;
+        case 730:
+            if (old.Room == 220) {
+                if (!vars.completed.Contains("castle")) {
+                    vars.completed.Add("castle");
+                    return settings["castle"];
                 }
             }
             return false;
