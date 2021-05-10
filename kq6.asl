@@ -31,6 +31,8 @@ state("DOSBox", "36995072") {
 }
 
 startup {
+    print("KQ6AS: startup action");
+
     settings.Add("magic_map", true, "Magic map");
     settings.SetToolTip("magic_map", "Split when the genie cutscene begins after you buy the magic map");
 
@@ -66,6 +68,7 @@ startup {
 }
 
 init {
+    print("KQ6AS: init action");
     version = modules.First().ModuleMemorySize.ToString();
 }
 
@@ -73,6 +76,7 @@ update {
     switch ((int) current.Room) {
         case 750:
             if (current.Score > old.Score) {
+                print("KQ6AS: add tower points");
                 vars.towerPoints += current.Score - old.Score;
             }
             break;
@@ -83,6 +87,7 @@ update {
 
 start {
     if (old.Room == 100 && current.Room == 200 && current.Score == 0) {
+        print("KQ6AS: start the run");
         vars.completed.Clear();
         vars.towerPoints = 0;
         return true;
@@ -91,6 +96,7 @@ start {
 
 reset {
     if (current.Room == 100) {
+        print("KQ6AS: reset the run");
         vars.completed.Clear();
         vars.towerPoints = 0;
         return true;
@@ -102,6 +108,7 @@ split {
         case 145:
             if (old.Room == 280) {
                 if (!vars.completed.Contains("magic_map")) {
+                    print("KQ6AS: map split");
                     vars.completed.Add("magic_map");
                     return settings["magic_map"];
                 }
@@ -110,12 +117,14 @@ split {
         case 155:
             if (old.Room == 340) {
                 if (!vars.completed.Contains("nightmare")) {
+                    print("KQ6AS: nightmare split");
                     vars.completed.Add("nightmare");
                     return settings["nightmare"];
                 }
             }
             if (old.Room == 680) {
                 if (!vars.completed.Contains("samhain")) {
+                    print("KQ6AS: samhain split");
                     vars.completed.Add("samhain");
                     return settings["samhain"];
                 }
@@ -124,6 +133,7 @@ split {
         case 300:
             if (vars.completed.Contains("gnomes")) {
                 if (!vars.completed.Contains("cliff_base")) {
+                    print("KQ6AS: cliff base split");
                     vars.completed.Add("cliff_base");
                     return settings["cliff_base"];
                 }
@@ -132,12 +142,14 @@ split {
         case 340:
             if (old.Room == 320) {
                 if (!vars.completed.Contains("cliff_top")) {
+                    print("KQ6AS: cliff top split");
                     vars.completed.Add("cliff_top");
                     return settings["cliff_top"];
                 }
             }
             if (old.Room == 440) {
                 if (!vars.completed.Contains("catacombs")) {
+                    print("KQ6AS: catacombs split");
                     vars.completed.Add("catacombs");
                     return settings["catacombs"];
                 }
@@ -146,6 +158,7 @@ split {
         case 450:
             if (current.Score - old.Score == 2 && current.XPosition == 231 && current.YPosition == 129) {
                  if (!vars.completed.Contains("gnomes")) {
+                    print("KQ6AS: gnomes split (fooled them)");
                     vars.completed.Add("gnomes");
                     return settings["gnomes"];
                 }
@@ -154,6 +167,7 @@ split {
         case 460:
             if (old.Room == 450) {
                 if (!vars.completed.Contains("gnomes")) {
+                    print("KQ6AS: gnomes split (glitched to bookworm)");
                     vars.completed.Add("gnomes");
                     return settings["gnomes"];
                 }
@@ -162,6 +176,7 @@ split {
         case 470:
             if (old.Room == 450) {
                 if (!vars.completed.Contains("gnomes")) {
+                    print("KQ6AS: gnomes split (glitched to swamp)");
                     vars.completed.Add("gnomes");
                     return settings["gnomes"];
                 }
@@ -170,6 +185,7 @@ split {
         case 540:
             if (current.Score - old.Score == 2) {
                  if (!vars.completed.Contains("beast")) {
+                    print("KQ6AS: beast split");
                     vars.completed.Add("beast");
                     return settings["beast"];
                 }
@@ -178,6 +194,7 @@ split {
         case 710:
             if (old.Room == 230) {
                 if (!vars.completed.Contains("castle")) {
+                    print("KQ6AS: castle split (long path)");
                     vars.completed.Add("castle");
                     return settings["castle"];
                 }
@@ -186,6 +203,7 @@ split {
         case 730:
             if (old.Room == 220) {
                 if (!vars.completed.Contains("castle")) {
+                    print("KQ6AS: castle split (short path)");
                     vars.completed.Add("castle");
                     return settings["castle"];
                 }
@@ -194,6 +212,7 @@ split {
         case 750:
             if (current.Score - old.Score == 5 && vars.towerPoints >= 7) {
                 if (!vars.completed.Contains("vizier")) {
+                    print("KQ6AS: vizier split");
                     vars.completed.Add("vizier");
                     return settings["vizier"];
                 }
