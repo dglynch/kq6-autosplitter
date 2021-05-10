@@ -1,5 +1,5 @@
 // Game:        King's Quest VI: Heir Today, Gone Tomorrow
-// Emulator:    DOSBox ECE (any recent version, or r4230)
+// Emulator:    DOSBox ECE (any recent version, or r4230, or r4180)
 // Author:      Dan Lynch
 
 state("DOSBox", "35627008") {
@@ -21,6 +21,13 @@ state("DOSBox", "36634624") {
     byte Score      : "DOSBox.exe", 0x519670, 0x23C52;
     short XPosition : "DOSBox.exe", 0x519670, 0x23DCC;
     short YPosition : "DOSBox.exe", 0x519670, 0x23DCE;
+}
+
+state("DOSBox", "36995072") {
+    short Room      : "DOSBox.exe", 0x571670, 0x23C4A;
+    byte Score      : "DOSBox.exe", 0x571670, 0x23C52;
+    short XPosition : "DOSBox.exe", 0x571670, 0x23DCC;
+    short YPosition : "DOSBox.exe", 0x571670, 0x23DCE;
 }
 
 startup {
