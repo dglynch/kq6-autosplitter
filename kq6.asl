@@ -73,6 +73,15 @@ init {
 }
 
 update {
+    if (current.Room != old.Room) {
+        print("KQ6AS: moved from room " + old.Room + " to room " + current.Room);
+    }
+
+    if (current.Score != old.Score) {
+        int points = current.Score - old.Score;
+        print("KQ6AS: earned " + points + " point" + (Math.Abs(points) == 1 ? "" : "s"));
+    }
+
     switch ((int) current.Room) {
         case 750:
             if (current.Score > old.Score) {
