@@ -143,7 +143,8 @@ update {
 
     int points = current.Score - old.Score;
     if (points != 0) {
-        print("KQ6AS: earned " + points + " point" + (Math.Abs(points) == 1 ? "" : "s"));
+        string location = "(" + current.XPosition + ", " + current.YPosition + ")";
+        print("KQ6AS: earned " + points + " point" + (Math.Abs(points) == 1 ? "" : "s") + " at " + location + " in room " + current.Room);
     }
     if (current.Room == 750 && points > 0) {
         print("KQ6AS: add tower points");
