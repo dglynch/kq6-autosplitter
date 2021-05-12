@@ -98,9 +98,10 @@ init {
 
     vars.performSplitWithExtra = (Func<string, string, bool>) ((splitName, extra) => {
         if (!vars.completed.Contains(splitName)) {
-            print("KQ6AS: " + splitName + " split" + (extra != null ? " (" + extra + ")" : ""));
+            bool splitting = settings[splitName];
+            print("KQ6AS: " + (splitting ? "split at" : "skip") + " the " + splitName + " split" + (extra != null ? " (" + extra + ")" : ""));
             vars.completed.Add(splitName);
-            return settings[splitName];
+            return splitting;
         } else {
             return false;
         }
