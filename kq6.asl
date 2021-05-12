@@ -65,6 +65,33 @@ startup {
 
     vars.completed = new HashSet<string>();
     vars.towerPoints = 0;
+    vars.splitOptions = new Dictionary<string, bool>();
+    vars.optionalSplits = new List<string>() {
+        "magic_map",
+        "gnomes",
+        "cliff_base",
+        "cliff_top",
+        "catacombs",
+        "beast",
+        "nightmare",
+        "samhain",
+        "castle",
+        "vizier"
+    };
+
+    vars.performSplitWithExtra = (Func<string, string, bool>) ((splitName, extra) => {
+        if (!vars.completed.Contains(splitName)) {
+            print("KQ6AS: " + splitName + " split" + (extra != null ? " (" + extra + ")" : ""));
+            vars.completed.Add(splitName);
+            return vars.splitOptions[splitName];
+        } else {
+            return false;
+        }
+    });
+
+    vars.performSplit = (Func<string, bool>) ((splitName) => {
+        return vars.performSplitWithExtra(splitName, null);
+    });
 }
 
 init {
@@ -92,6 +119,10 @@ update {
         default:
             break;
     }
+
+    foreach (string split in vars.optionalSplits) {
+       vars.splitOptions[split] = settings[split];
+    }
 }
 
 start {
@@ -116,115 +147,63 @@ split {
     switch ((int) current.Room) {
         case 145:
             if (old.Room == 280) {
-                if (!vars.completed.Contains("magic_map")) {
-                    print("KQ6AS: map split");
-                    vars.completed.Add("magic_map");
-                    return settings["magic_map"];
-                }
+                return vars.performSplit("magic_map");
             }
             return false;
         case 155:
             if (old.Room == 340) {
-                if (!vars.completed.Contains("nightmare")) {
-                    print("KQ6AS: nightmare split");
-                    vars.completed.Add("nightmare");
-                    return settings["nightmare"];
-                }
+                return vars.performSplit("nightmare");
             }
             if (old.Room == 680) {
-                if (!vars.completed.Contains("samhain")) {
-                    print("KQ6AS: samhain split");
-                    vars.completed.Add("samhain");
-                    return settings["samhain"];
-                }
+                return vars.performSplit("samhain");
             }
             return false;
         case 300:
             if (vars.completed.Contains("gnomes")) {
-                if (!vars.completed.Contains("cliff_base")) {
-                    print("KQ6AS: cliff base split");
-                    vars.completed.Add("cliff_base");
-                    return settings["cliff_base"];
-                }
+                return vars.performSplit("cliff_base");
             }
             return false;
         case 340:
             if (old.Room == 320) {
-                if (!vars.completed.Contains("cliff_top")) {
-                    print("KQ6AS: cliff top split");
-                    vars.completed.Add("cliff_top");
-                    return settings["cliff_top"];
-                }
+                return vars.performSplit("cliff_top");
             }
             if (old.Room == 440) {
-                if (!vars.completed.Contains("catacombs")) {
-                    print("KQ6AS: catacombs split");
-                    vars.completed.Add("catacombs");
-                    return settings["catacombs"];
-                }
+                return vars.performSplit("catacombs");
             }
             return false;
         case 450:
             if (current.Score - old.Score == 2 && current.XPosition == 231 && current.YPosition == 129) {
-                 if (!vars.completed.Contains("gnomes")) {
-                    print("KQ6AS: gnomes split (fooled them)");
-                    vars.completed.Add("gnomes");
-                    return settings["gnomes"];
-                }
+                return vars.performSplitWithExtra("gnomes", "fooled them");
             }
             return false;
         case 460:
             if (old.Room == 450) {
-                if (!vars.completed.Contains("gnomes")) {
-                    print("KQ6AS: gnomes split (glitched to bookworm)");
-                    vars.completed.Add("gnomes");
-                    return settings["gnomes"];
-                }
+                return vars.performSplitWithExtra("gnomes", "glitched to bookworm");
             }
             return false;
         case 470:
             if (old.Room == 450) {
-                if (!vars.completed.Contains("gnomes")) {
-                    print("KQ6AS: gnomes split (glitched to swamp)");
-                    vars.completed.Add("gnomes");
-                    return settings["gnomes"];
-                }
+                return vars.performSplitWithExtra("gnomes", "glitched to swamp");
             }
             return false;
         case 540:
             if (current.Score - old.Score == 2) {
-                 if (!vars.completed.Contains("beast")) {
-                    print("KQ6AS: beast split");
-                    vars.completed.Add("beast");
-                    return settings["beast"];
-                }
+                return vars.performSplit("beast");
             }
             return false;
         case 710:
             if (old.Room == 230) {
-                if (!vars.completed.Contains("castle")) {
-                    print("KQ6AS: castle split (long path)");
-                    vars.completed.Add("castle");
-                    return settings["castle"];
-                }
+                return vars.performSplitWithExtra("castle", "long path");
             }
             return false;
         case 730:
             if (old.Room == 220) {
-                if (!vars.completed.Contains("castle")) {
-                    print("KQ6AS: castle split (short path)");
-                    vars.completed.Add("castle");
-                    return settings["castle"];
-                }
+                return vars.performSplitWithExtra("castle", "short path");
             }
             return false;
         case 750:
             if (current.Score - old.Score == 5 && vars.towerPoints >= 7) {
-                if (!vars.completed.Contains("vizier")) {
-                    print("KQ6AS: vizier split");
-                    vars.completed.Add("vizier");
-                    return settings["vizier"];
-                }
+                return vars.performSplit("vizier");
             }
             return false;
         default:
