@@ -85,33 +85,6 @@ startup {
 
     vars.completed = new HashSet<string>();
     vars.towerPoints = 0;
-    vars.splitOptions = new Dictionary<string, bool>();
-    vars.optionalSplits = new List<string>() {
-        "magic_map",
-        "gnomes",
-        "cliff_base",
-        "cliff_top",
-        "catacombs",
-        "beast",
-        "nightmare",
-        "samhain",
-        "castle",
-        "vizier"
-    };
-
-    vars.performSplitWithExtra = (Func<string, string, bool>) ((splitName, extra) => {
-        if (!vars.completed.Contains(splitName)) {
-            print("KQ6AS: " + splitName + " split" + (extra != null ? " (" + extra + ")" : ""));
-            vars.completed.Add(splitName);
-            return vars.splitOptions[splitName];
-        } else {
-            return false;
-        }
-    });
-
-    vars.performSplit = (Func<string, bool>) ((splitName) => {
-        return vars.performSplitWithExtra(splitName, null);
-    });
 }
 
 init {
@@ -122,6 +95,20 @@ init {
     } else {
         throw new Exception("KQ6AS: unexpected first module name: " + firstModule.ModuleName);
     }
+
+    vars.performSplitWithExtra = (Func<string, string, bool>) ((splitName, extra) => {
+        if (!vars.completed.Contains(splitName)) {
+            print("KQ6AS: " + splitName + " split" + (extra != null ? " (" + extra + ")" : ""));
+            vars.completed.Add(splitName);
+            return settings[splitName];
+        } else {
+            return false;
+        }
+    });
+
+    vars.performSplit = (Func<string, bool>) ((splitName) => {
+        return vars.performSplitWithExtra(splitName, null);
+    });
 }
 
 update {
@@ -167,10 +154,6 @@ update {
             break;
         default:
             break;
-    }
-
-    foreach (string split in vars.optionalSplits) {
-       vars.splitOptions[split] = settings[split];
     }
 }
 
