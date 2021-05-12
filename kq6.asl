@@ -140,20 +140,13 @@ update {
         print("KQ6AS: moved from room " + old.Room + " to room " + current.Room);
     }
 
-    if (current.Score != old.Score) {
-        int points = current.Score - old.Score;
+    int points = current.Score - old.Score;
+    if (points != 0) {
         print("KQ6AS: earned " + points + " point" + (Math.Abs(points) == 1 ? "" : "s"));
     }
-
-    switch ((int) current.Room) {
-        case 750:
-            if (current.Score > old.Score) {
-                print("KQ6AS: add tower points");
-                vars.towerPoints += current.Score - old.Score;
-            }
-            break;
-        default:
-            break;
+    if (current.Room == 750 && points > 0) {
+        print("KQ6AS: add tower points");
+        vars.towerPoints += points;
     }
 }
 
