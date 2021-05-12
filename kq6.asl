@@ -3,31 +3,31 @@
 // Author:      Dan Lynch
 
 state("DOSBox", "35627008") {
-    short Room      : "DOSBox.exe", 0x524670, 0x23C4A;
-    short Score     : "DOSBox.exe", 0x524670, 0x23C52;
-    short XPosition : "DOSBox.exe", 0x524670, 0x23DCC;
-    short YPosition : "DOSBox.exe", 0x524670, 0x23DCE;
+    short           Room                : "DOSBox.exe", 0x00524670, 0x00023C4A;
+    short           Score               : "DOSBox.exe", 0x00524670, 0x00023C52;
+    short           XPosition           : "DOSBox.exe", 0x00524670, 0x00023DCC;
+    short           YPosition           : "DOSBox.exe", 0x00524670, 0x00023DCE;
 }
 
 state("DOSBox", "35631104") {
-    short Room      : "DOSBox.exe", 0x525670, 0x23C4A;
-    short Score     : "DOSBox.exe", 0x525670, 0x23C52;
-    short XPosition : "DOSBox.exe", 0x525670, 0x23DCC;
-    short YPosition : "DOSBox.exe", 0x525670, 0x23DCE;
+    short           Room                : "DOSBox.exe", 0x00525670, 0x00023C4A;
+    short           Score               : "DOSBox.exe", 0x00525670, 0x00023C52;
+    short           XPosition           : "DOSBox.exe", 0x00525670, 0x00023DCC;
+    short           YPosition           : "DOSBox.exe", 0x00525670, 0x00023DCE;
 }
 
 state("DOSBox", "36634624") {
-    short Room      : "DOSBox.exe", 0x519670, 0x23C4A;
-    short Score     : "DOSBox.exe", 0x519670, 0x23C52;
-    short XPosition : "DOSBox.exe", 0x519670, 0x23DCC;
-    short YPosition : "DOSBox.exe", 0x519670, 0x23DCE;
+    short           Room                : "DOSBox.exe", 0x00519670, 0x00023C4A;
+    short           Score               : "DOSBox.exe", 0x00519670, 0x00023C52;
+    short           XPosition           : "DOSBox.exe", 0x00519670, 0x00023DCC;
+    short           YPosition           : "DOSBox.exe", 0x00519670, 0x00023DCE;
 }
 
 state("DOSBox", "36995072") {
-    short Room      : "DOSBox.exe", 0x571670, 0x23C4A;
-    short Score     : "DOSBox.exe", 0x571670, 0x23C52;
-    short XPosition : "DOSBox.exe", 0x571670, 0x23DCC;
-    short YPosition : "DOSBox.exe", 0x571670, 0x23DCE;
+    short           Room                : "DOSBox.exe", 0x00571670, 0x00023C4A;
+    short           Score               : "DOSBox.exe", 0x00571670, 0x00023C52;
+    short           XPosition           : "DOSBox.exe", 0x00571670, 0x00023DCC;
+    short           YPosition           : "DOSBox.exe", 0x00571670, 0x00023DCE;
 }
 
 startup {
