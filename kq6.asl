@@ -116,7 +116,12 @@ startup {
 
 init {
     print("KQ6AS: init action");
-    version = modules.First().ModuleMemorySize.ToString();
+    var firstModule = modules.First();
+    if (firstModule.ModuleName.ToLower().Contains("dosbox")) {
+        version = firstModule.ModuleMemorySize.ToString();
+    } else {
+        throw new Exception("KQ6AS: unexpected first module name: " + firstModule.ModuleName);
+    }
 }
 
 update {
