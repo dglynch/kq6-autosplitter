@@ -4,28 +4,28 @@
 
 state("DOSBox", "35627008") {
     short Room      : "DOSBox.exe", 0x524670, 0x23C4A;
-    byte Score      : "DOSBox.exe", 0x524670, 0x23C52;
+    short Score     : "DOSBox.exe", 0x524670, 0x23C52;
     short XPosition : "DOSBox.exe", 0x524670, 0x23DCC;
     short YPosition : "DOSBox.exe", 0x524670, 0x23DCE;
 }
 
 state("DOSBox", "35631104") {
     short Room      : "DOSBox.exe", 0x525670, 0x23C4A;
-    byte Score      : "DOSBox.exe", 0x525670, 0x23C52;
+    short Score     : "DOSBox.exe", 0x525670, 0x23C52;
     short XPosition : "DOSBox.exe", 0x525670, 0x23DCC;
     short YPosition : "DOSBox.exe", 0x525670, 0x23DCE;
 }
 
 state("DOSBox", "36634624") {
     short Room      : "DOSBox.exe", 0x519670, 0x23C4A;
-    byte Score      : "DOSBox.exe", 0x519670, 0x23C52;
+    short Score     : "DOSBox.exe", 0x519670, 0x23C52;
     short XPosition : "DOSBox.exe", 0x519670, 0x23DCC;
     short YPosition : "DOSBox.exe", 0x519670, 0x23DCE;
 }
 
 state("DOSBox", "36995072") {
     short Room      : "DOSBox.exe", 0x571670, 0x23C4A;
-    byte Score      : "DOSBox.exe", 0x571670, 0x23C52;
+    short Score     : "DOSBox.exe", 0x571670, 0x23C52;
     short XPosition : "DOSBox.exe", 0x571670, 0x23DCC;
     short YPosition : "DOSBox.exe", 0x571670, 0x23DCE;
 }
