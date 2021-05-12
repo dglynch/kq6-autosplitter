@@ -3,31 +3,51 @@
 // Author:      Dan Lynch
 
 state("DOSBox", "35627008") {
-    short           Room                : "DOSBox.exe", 0x00524670, 0x00023C4A;
-    short           Score               : "DOSBox.exe", 0x00524670, 0x00023C52;
-    short           XPosition           : "DOSBox.exe", 0x00524670, 0x00023DCC;
-    short           YPosition           : "DOSBox.exe", 0x00524670, 0x00023DCE;
+    short           RoomInitial         : "DOSBox.exe", 0x00524670, 0x00023C4A;
+    short           ScoreInitial        : "DOSBox.exe", 0x00524670, 0x00023C52;
+    short           XPositionInitial    : "DOSBox.exe", 0x00524670, 0x00023DCC;
+    short           YPositionInitial    : "DOSBox.exe", 0x00524670, 0x00023DCE;
+
+    short           RoomRestart         : "DOSBox.exe", 0x00524670, 0x00023C6E;
+    short           ScoreRestart        : "DOSBox.exe", 0x00524670, 0x00023C76;
+    short           XPositionRestart    : "DOSBox.exe", 0x00524670, 0x00023DF0;
+    short           YPositionRestart    : "DOSBox.exe", 0x00524670, 0x00023DF2;
 }
 
 state("DOSBox", "35631104") {
-    short           Room                : "DOSBox.exe", 0x00525670, 0x00023C4A;
-    short           Score               : "DOSBox.exe", 0x00525670, 0x00023C52;
-    short           XPosition           : "DOSBox.exe", 0x00525670, 0x00023DCC;
-    short           YPosition           : "DOSBox.exe", 0x00525670, 0x00023DCE;
+    short           RoomInitial         : "DOSBox.exe", 0x00525670, 0x00023C4A;
+    short           ScoreInitial        : "DOSBox.exe", 0x00525670, 0x00023C52;
+    short           XPositionInitial    : "DOSBox.exe", 0x00525670, 0x00023DCC;
+    short           YPositionInitial    : "DOSBox.exe", 0x00525670, 0x00023DCE;
+
+    short           RoomRestart         : "DOSBox.exe", 0x00525670, 0x00023C6E;
+    short           ScoreRestart        : "DOSBox.exe", 0x00525670, 0x00023C76;
+    short           XPositionRestart    : "DOSBox.exe", 0x00525670, 0x00023DF0;
+    short           YPositionRestart    : "DOSBox.exe", 0x00525670, 0x00023DF2;
 }
 
 state("DOSBox", "36634624") {
-    short           Room                : "DOSBox.exe", 0x00519670, 0x00023C4A;
-    short           Score               : "DOSBox.exe", 0x00519670, 0x00023C52;
-    short           XPosition           : "DOSBox.exe", 0x00519670, 0x00023DCC;
-    short           YPosition           : "DOSBox.exe", 0x00519670, 0x00023DCE;
+    short           RoomInitial         : "DOSBox.exe", 0x00519670, 0x00023C4A;
+    short           ScoreInitial        : "DOSBox.exe", 0x00519670, 0x00023C52;
+    short           XPositionInitial    : "DOSBox.exe", 0x00519670, 0x00023DCC;
+    short           YPositionInitial    : "DOSBox.exe", 0x00519670, 0x00023DCE;
+
+    short           RoomRestart         : "DOSBox.exe", 0x00519670, 0x00023C6E;
+    short           ScoreRestart        : "DOSBox.exe", 0x00519670, 0x00023C76;
+    short           XPositionRestart    : "DOSBox.exe", 0x00519670, 0x00023DF0;
+    short           YPositionRestart    : "DOSBox.exe", 0x00519670, 0x00023DF2;
 }
 
 state("DOSBox", "36995072") {
-    short           Room                : "DOSBox.exe", 0x00571670, 0x00023C4A;
-    short           Score               : "DOSBox.exe", 0x00571670, 0x00023C52;
-    short           XPosition           : "DOSBox.exe", 0x00571670, 0x00023DCC;
-    short           YPosition           : "DOSBox.exe", 0x00571670, 0x00023DCE;
+    short           RoomInitial         : "DOSBox.exe", 0x00571670, 0x00023C4A;
+    short           ScoreInitial        : "DOSBox.exe", 0x00571670, 0x00023C52;
+    short           XPositionInitial    : "DOSBox.exe", 0x00571670, 0x00023DCC;
+    short           YPositionInitial    : "DOSBox.exe", 0x00571670, 0x00023DCE;
+
+    short           RoomRestart         : "DOSBox.exe", 0x00571670, 0x00023C6E;
+    short           ScoreRestart        : "DOSBox.exe", 0x00571670, 0x00023C76;
+    short           XPositionRestart    : "DOSBox.exe", 0x00571670, 0x00023DF0;
+    short           YPositionRestart    : "DOSBox.exe", 0x00571670, 0x00023DF2;
 }
 
 startup {
@@ -100,6 +120,30 @@ init {
 }
 
 update {
+    if (current.RoomInitial >= 0 && current.RoomInitial <= 1000
+            && current.ScoreInitial >= 0 && current.ScoreInitial <= 231
+            && current.XPositionInitial >= 0 && current.XPositionInitial <= 320
+            && current.YPositionInitial >= 0 && current.YPositionInitial <= 320) {
+        current.Room = current.RoomInitial;
+        current.Score = current.ScoreInitial;
+        current.XPosition = current.XPositionInitial;
+        current.YPosition = current.YPositionInitial;
+    } else if (current.RoomRestart >= 0 && current.RoomRestart <= 1000
+            && current.ScoreRestart >= 0 && current.ScoreRestart <= 231
+            && current.XPositionRestart >= 0 && current.XPositionRestart <= 320
+            && current.YPositionRestart >= 0 && current.YPositionRestart <= 320) {
+        current.Room = current.RoomRestart;
+        current.Score = current.ScoreRestart;
+        current.XPosition = current.XPositionRestart;
+        current.YPosition = current.YPositionRestart;
+    } else {
+        return false;
+    }
+
+    if (!((IDictionary<String, object>) old).ContainsKey("Room")) {
+        return false;
+    }
+
     if (current.Room != old.Room) {
         print("KQ6AS: moved from room " + old.Room + " to room " + current.Room);
     }
