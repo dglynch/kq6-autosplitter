@@ -1,6 +1,6 @@
 # kq6-autosplitter
 
-This is LiveSplit Auto Splitter for King's Quest VI: Heir Today, Gone Tomorrow.
+This is a LiveSplit Auto Splitter for King's Quest VI: Heir Today, Gone Tomorrow.
 
 ## Instructions for use
 
